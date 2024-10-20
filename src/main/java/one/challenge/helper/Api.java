@@ -15,7 +15,7 @@ public class Api {
     public Api() {
         client = HttpClient.newHttpClient();
     }
-    public<T> T GET(String url, Class<T> responseType) {
+    public<T extends ApiResponse> T GET(String url, Class<T> responseType) {
         URI uri = URI.create(url);
         HttpRequest request = HttpRequest.newBuilder()
             .GET().uri(uri).build();
@@ -25,9 +25,11 @@ public class Api {
             if (code == 200) {
                 Gson gson = new Gson();
                 T result = gson.fromJson(response.body(), responseType);
+                result.__body = response.body();
                 return result;
             } else {
-                Logger.log(new String[] {
+                Logger.error(new String[] {
+                    "api-rs: GET " + url,
                     "api-rs: Server response with code " + code,
                     "api-rs: " + response.body()
                 });
