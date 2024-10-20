@@ -25,4 +25,16 @@ public class Logger {
     public static void error(String message, boolean endLine) {
         System.err.print("[error]: " + message + (endLine ? "\n" : ""));
     }
+    public static void print(String[] messages) {
+        for (String message : messages) print(message);
+    }
+    public static void print(Object message) {
+        print(message.toString(), true);
+    } 
+    public static void print(String message) {
+        print(message, true);
+    } 
+    public static void print(String message, boolean endLine) {
+        System.out.print(message + (endLine ? "\n" : ""));
+    }
 }
