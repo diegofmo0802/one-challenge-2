@@ -9,6 +9,13 @@ public class CSVResult extends ArrayList<CSVRow> {
     public CSVResult(CSV csv) { super();
         this.csv = csv;
     }
+    public List<Map<String, String>> getData() {
+        ArrayList<Map<String, String>> result = new ArrayList<>();
+        for (CSVRow row: this) {
+            result.add(row.getData());
+        }
+        return result;
+    }
     @Override
     public String toString() {
         ArrayList<Map<String, String>> list = new ArrayList<>();
