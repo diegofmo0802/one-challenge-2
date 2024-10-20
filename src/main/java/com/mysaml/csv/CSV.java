@@ -81,9 +81,11 @@ public class CSV {
      */
     public void save() throws IOException {
         try (BufferedWriter buffer = new BufferedWriter(new FileWriter(file))) {
+            ArrayList<Map<String, String>> result = new ArrayList<>();
             for (int index = 0; index < data.size(); index++) {
                 if (toDelete.contains(index)) continue;
                 Map<String, String> lineData = data.get(index);
+                result.add(lineData);
                 ArrayList<String> values = new ArrayList<>();
                 for (String field : fields) {
                     String value = lineData.getOrDefault(field, "");
@@ -93,6 +95,7 @@ public class CSV {
                 buffer.write(line);
                 buffer.newLine();
             }
+            data = result;
             toDelete = new HashSet<>();
         }
     }
