@@ -29,6 +29,12 @@ public class CSVRow {
         csv.edit(index, partialData);
     }
     /**
+     * deletes the current CSV row with the given partial data.
+     */
+    public void delete() {
+        csv.delete(index);
+    }
+    /**
      * Gets the value associated with the given field in this row.
      * @param field the name of the field to retrieve the value for.
      * @return the value associated with the field, or null if the field does not exist.

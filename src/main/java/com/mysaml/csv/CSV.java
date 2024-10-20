@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class CSV {
     private final String separator;
     private ArrayList<Map<String, String>> data;
     private File file;
+    private Set<Integer> toDelete;
 
     /**
      * Constructs a CSV object with the specified path, fields, and separator.
@@ -43,6 +45,7 @@ public class CSV {
         this.separator = separator;
         this.file = getFile(path);
         this.data = new ArrayList<>();
+        this.toDelete = new HashSet<>();
     }
 
     /**
@@ -162,6 +165,26 @@ public class CSV {
         Set<CSVRow> result = query(filter);
         for (CSVRow row : result) {
             row.edit(partialData);
+        }
+    }
+
+    /**
+     * delete a specific row of data identified by its index with partial data.
+     * @param rowIndex The index of the row to delete.
+     */
+    public void delete(int rowIndex) {
+        if (rowIndex < 0 || rowIndex >= data.size()) return;
+        toDelete.add(rowIndex);
+    }
+
+    /**
+     * deletes rows of data that match a specified filter with partial data.
+     * @param filter A predicate that defines the filtering condition.
+     */
+    public void delete(Predicate<CSVRow> filter) {
+        Set<CSVRow> result = query(filter);
+        for (CSVRow row : result) {
+            row.delete();
         }
     }
 
