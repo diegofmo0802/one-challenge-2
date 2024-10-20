@@ -1,11 +1,3 @@
-/*
-Purpose: .
-Authors:
-    - Diego Fernando Moreno - 202363205
-    - Oscar David Cadavid Ramirez - 202363243
-    - Veruzka Guapacha Quiroz - 202378085
-Date: 16-10-2024
-*/
 package com.mysaml.csv;
 
 import java.io.BufferedReader;
