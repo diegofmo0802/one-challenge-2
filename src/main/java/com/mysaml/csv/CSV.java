@@ -163,7 +163,7 @@ public class CSV {
      * @param partialData A map of key-value pairs representing the fields to update.
      */
     public void edit(Predicate<CSVRow> filter, Map<String, String> partialData) {
-        Set<CSVRow> result = query(filter);
+        List<CSVRow> result = query(filter);
         for (CSVRow row : result) {
             row.edit(partialData);
         }
@@ -183,7 +183,7 @@ public class CSV {
      * @param filter A predicate that defines the filtering condition.
      */
     public void delete(Predicate<CSVRow> filter) {
-        Set<CSVRow> result = query(filter);
+        List<CSVRow> result = query(filter);
         for (CSVRow row : result) {
             row.delete();
         }

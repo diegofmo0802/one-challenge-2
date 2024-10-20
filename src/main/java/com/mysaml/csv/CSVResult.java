@@ -1,10 +1,10 @@
 package com.mysaml.csv;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
-public class CSVResult extends HashSet<CSVRow> {
+public class CSVResult extends ArrayList<CSVRow> {
     public final CSV csv;
     public CSVResult(CSV csv) { super();
         this.csv = csv;
