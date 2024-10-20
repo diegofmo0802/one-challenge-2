@@ -81,7 +81,9 @@ public class CSV {
      */
     public void save() throws IOException {
         try (BufferedWriter buffer = new BufferedWriter(new FileWriter(file))) {
-            for (Map<String, String> lineData : data) {
+            for (int index = 0; index < data.size(); index++) {
+                if (toDelete.contains(index)) continue;
+                Map<String, String> lineData = data.get(index);
                 ArrayList<String> values = new ArrayList<>();
                 for (String field : fields) {
                     String value = lineData.getOrDefault(field, "");
@@ -91,6 +93,7 @@ public class CSV {
                 buffer.write(line);
                 buffer.newLine();
             }
+            toDelete = new HashSet<>();
         }
     }
 
@@ -100,6 +103,12 @@ public class CSV {
      */
     public List<Map<String, String>> getData() {
         return this.data;
+    }
+    /*
+     * Retrieves the total rows loaded
+     */
+    public int rowCount() {
+        return this.data.size();
     }
 
     /**
