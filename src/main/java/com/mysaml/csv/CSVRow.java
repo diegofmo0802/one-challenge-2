@@ -70,6 +70,23 @@ public class CSVRow {
     }
 
     /**
+     * Gets the long value associated with the given field.
+     * @param field the name of the field to retrieve the long value for.
+     * @return the double value associated with the field, or null if the field does not exist or cannot be converted to a double.
+     */
+    public Long getLong(String field) {
+        String value = get(field);
+        if (value != null) {
+            try {
+                return Long.parseLong(value);
+            } catch (NumberFormatException e) {
+                System.err.println("Value for field '" + field + "' is not a long: " + value);
+            }
+        }
+        return null;
+    }
+
+    /**
      * Gets the boolean value associated with the given field.
      * @param field the name of the field to retrieve the boolean value for.
      * @return the boolean value associated with the field, or null if the field does not exist or cannot be converted to a boolean.
